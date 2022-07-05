@@ -1,0 +1,11 @@
+.footer {
+  margin-top: auto;
+  margin-bottom: 2rem;
+}
+
+.footer a {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  font-size: 1.8rem;
+}
