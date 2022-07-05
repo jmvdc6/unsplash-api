@@ -10,7 +10,7 @@ const Header = () => {
         rel='noopener noreferrer'
         className={styles.link}
       >
-        Unsplash API
+        Unsplash Gallery
       </a>
     </header>
   );
