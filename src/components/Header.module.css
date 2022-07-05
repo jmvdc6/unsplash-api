@@ -1,0 +1,11 @@
+.header {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+.link {
+  text-transform: uppercase;
+  color: black;
+  font-size: 3rem;
+  font-weight: bolder;
+}
