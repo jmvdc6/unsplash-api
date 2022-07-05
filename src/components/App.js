@@ -4,7 +4,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Header from "./Header";
 import SearchBar from "./SearchBar";
 import ImageList from "./ImageList";
-import Loader from "./Loader";
 
 import unsplash from "../api/unsplash";
 
@@ -14,13 +13,20 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [term, setTerm] = useState("");
+  const [loading, setLoading] = useState(false);
   const onSearchSubmit = async (term) => {
-    const { data } = await unsplash.get("/search/photos", {
-      params: { query: term, page: page },
-    });
-    setImages(data.results);
-    setTerm(term);
-    setPage(page + 1);
+    setLoading(true);
+    try {
+      const { data } = await unsplash.get("/searchphotos", {
+        params: { query: term, page: page },
+      });
+      setImages(data.results);
+      setTerm(term);
+      setPage(page + 1);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const onLoadImages = async () => {
@@ -35,15 +41,19 @@ const App = () => {
   return (
     <div className={styles.layout}>
       <Header />
+
       <main className={styles.container}>
         <SearchBar onSubmit={onSearchSubmit} />
         <InfiniteScroll
           dataLength={images.length}
           hasMore={true}
           next={onLoadImages}
-          loader={<Loader />}
         >
-          <ImageList images={images} onSubmit={onSearchSubmit} />
+          <ImageList
+            images={images}
+            onSubmit={onSearchSubmit}
+            loading={loading}
+          />
         </InfiniteScroll>
       </main>
     </div>
