@@ -12,3 +12,9 @@
   object-fit: cover;
   border-radius: 2px;
 }
+
+@media (max-width: 36.5em) {
+  .image-list img {
+    height: auto;
+  }
+}
